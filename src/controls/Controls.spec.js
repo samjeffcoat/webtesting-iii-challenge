@@ -22,4 +22,14 @@ describe("lock button", () => {
         fireEvent.click(button);
         expect(toggleLocked).toBeCalledTimes(1);
     })
+
+    it("should not open or close when gate is locked", () => {
+        const toggleClosed= jest.fn();
+        const {getByText} = render(
+            <Controls closed = {true} locked ={true}toggleClosed = {toggleClosed}/>
+        );
+        const button = getByText(/open gate/i);
+        fireEvent.click(button);
+        expect(toggleClosed).toBeCalledTimes(0);
+    })
 })
