@@ -13,4 +13,13 @@ describe("lock button", () => {
         fireEvent.click(button);
         expect(toggleLocked).toBeCalledTimes(0);
     })
+    it("changes text to unlocked when gate unlocked", ()=>{
+        const toggleLocked = jest.fn();
+        const {getByText} = render(
+            <Controls closed ={true} locked = {false} toggleLocked= {toggleLocked}/>
+        );
+        const button = getByText(/lock gate/i);
+        fireEvent.click(button);
+        expect(toggleLocked).toBeCalledTimes(1);
+    })
 })
